@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inicio</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<h1>Bienvenido a la Aplicación de Gestión de Cursos</h1>
+<div class="button-container">
+    <a th:href="@{/profesores/nuevo}" class="button-link">Home</a>
+    <a th:href="@{/profesores}" class="button-link">Profesores</a>
+    <a th:href="@{/estudiantes/nuevo}" class="button-link">Estudiantes</a>
+</div>
+</body>
+</html>

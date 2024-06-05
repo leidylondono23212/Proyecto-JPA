@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Profesores</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<h1>Profesores</h1>
+<a th:href="@{/profesores/nuevo}" class="button-link">Nuevo Profesor</a>
+<a th:href="@{/}" class="button-link">Volver</a>
+<table border="1">
+    <tr>
+        <th style="display: none;">ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Especialidad</th>
+        <th>Certificaciones</th>
+        <th>Correo Electrónico</th>
+        <th>Acciones</th>
+        <th>Curso</th>
+    </tr>
+    <tr th:each="profesor : ${profesores}">
+        <td style="display: none;" th:text="${profesor.idProfesor}"></td>
+        <td th:text="${profesor.nombre}"></td>
+        <td th:text="${profesor.apellido}"></td>
+        <td th:text="${profesor.especialidad}"></td>
+        <td th:text="${profesor.certificaciones}"></td>
+        <td th:text="${profesor.correoElectronico}"></td>
+        <td>
+            <a th:href="@{|/profesores/editar/${profesor.idProfesor}|}">Editar</a>
+            <a th:href="@{|/profesores/eliminar/${profesor.idProfesor}|}">Eliminar</a>
+        </td>
+        <td>
+            <a th:href="@{|/cursos/editar/${profesor.idProfesor}|}">Curso</a>
+        </td>
+    </tr>
+</table>
+<a th:href="@{/especializaciones}" class="button-link">Especializaciones</a>
+</body>
+</html>
