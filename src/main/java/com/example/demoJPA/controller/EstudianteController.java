@@ -1,8 +1,6 @@
 package com.example.demoJPA.controller;
 
-import com.example.demoJPA.model.Curso;
 import com.example.demoJPA.model.Estudiante;
-import com.example.demoJPA.model.Profesor;
 import com.example.demoJPA.repository.EstudianteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Controller
 @RequestMapping("/estudiantes")

@@ -9,12 +9,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/profesores")
 public class ProfesorController {
 
     @Autowired
     private ProfesorRepository profesorRepository;
+
     @Autowired
     private CursoRepository cursoRepository;
 
@@ -33,14 +36,13 @@ public class ProfesorController {
     @PostMapping
     public String guardarProfesor(@ModelAttribute Curso curso) {
         Profesor savedProfesor = profesorRepository.save(curso.getProfesor());
-        curso.setIdProfesor(savedProfesor.getIdProfesor());
+        curso.setProfesor(savedProfesor);
         cursoRepository.save(curso);
         return "redirect:/profesores";
     }
 
     @GetMapping("/editar/{id}")
     public String editarProfesor(@PathVariable Integer id, Model model) {
-        model.addAttribute("curso", new Curso());
         Profesor profesor = profesorRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("ID inválido:" + id));
         model.addAttribute("profesor", profesor);
         return "formularioProfesor";

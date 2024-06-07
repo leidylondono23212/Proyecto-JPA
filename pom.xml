@@ -8,11 +8,11 @@
 		<version>3.2.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.ces2</groupId>
-	<artifactId>Clase10Prep-1</artifactId>
-	<version>0.0.1</version>
-	<name>Clase10Prep-1</name>
-	<description>Spring Boot Tutorial using spring data JPA</description>
+	<groupId>com.example</groupId>
+	<artifactId>demoJPA</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>demoJPA</name>
+	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

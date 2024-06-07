@@ -14,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Controller
 @RequestMapping("/estudiantes_cursos")
@@ -35,16 +33,13 @@ public class EstudianteCursoController {
 
     @GetMapping
     public String listarEstudiantesCursos(Model model) {
-
-        List<EstudianteCurso> estudianteCurso = StreamSupport.stream(estudianteCursoRepository.findAll().spliterator(), false)
-                .collect(Collectors.toList());
-        for (EstudianteCurso estCur: estudianteCurso){
+        List<EstudianteCurso> estudianteCurso = estudianteCursoRepository.findAll();
+        for (EstudianteCurso estCur : estudianteCurso) {
             Estudiante estudiante = estudianteRepository.findById(estCur.getIdEstudiante()).orElse(null);
             estCur.setEstudiante(estudiante);
             Curso curso = cursoRepository.findById(estCur.getIdCurso()).orElse(null);
             estCur.setCurso(curso);
         }
-
         model.addAttribute("estudiantesCursos", estudianteCurso);
         return "estudiantesCursos";
     }
@@ -87,11 +82,9 @@ public class EstudianteCursoController {
 
     @GetMapping("/ver_cursos/{id}")
     public String listarCursosEstudiantes(@PathVariable Integer id, Model model) {
-
-        List<Curso> cursos = StreamSupport.stream(cursoRepository.findByEstudiante(id).spliterator(), false)
-                .collect(Collectors.toList());
+        Iterable<Curso> cursos = cursoRepository.findByEstudiante(id);
         for (Curso curso : cursos) {
-            Profesor profesor = profesorRepository.findById(curso.getIdProfesor()).orElse(null);
+            Profesor profesor = profesorRepository.findById(curso.getProfesor().getIdProfesor()).orElse(null);
             curso.setProfesor(profesor);
         }
         model.addAttribute("cursos", cursos);

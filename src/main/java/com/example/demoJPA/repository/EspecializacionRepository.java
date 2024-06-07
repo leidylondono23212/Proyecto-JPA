@@ -13,5 +13,5 @@ import java.util.Set;
 public interface EspecializacionRepository extends JpaRepository<Especializacion, Integer> {
     @Query(value="SELECT * FROM especializaciones WHERE ID_Profesor = ?1",
             nativeQuery=true)
-    List<Especializacion> findByProfesorId(Integer id);
+    Set<Especializacion> findByProfesorId(Integer id);
 }

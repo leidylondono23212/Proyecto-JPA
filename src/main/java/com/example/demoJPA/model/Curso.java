@@ -28,7 +28,7 @@ public class Curso {
     private String horario;
 
     @ManyToOne
-    @JoinColumn(name = "ID_Profesor", insertable = false, updatable = false)
+    @JoinColumn(name = "ID_Profesor")
     private Profesor profesor;
 }
 

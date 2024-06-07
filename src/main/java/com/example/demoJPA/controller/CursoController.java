@@ -30,7 +30,7 @@ public class CursoController {
     public String listarCursos(Model model) {
         List<Curso> cursos = cursoRepository.findAll();
         for (Curso curso : cursos) {
-            Profesor profesor = profesorRepository.findById(curso.getIdProfesor()).orElse(null);
+            Profesor profesor = profesorRepository.findById(curso.getProfesor().getIdProfesor()).orElse(null);
             curso.setProfesor(profesor);
         }
         model.addAttribute("cursos", cursos);
@@ -53,7 +53,7 @@ public class CursoController {
     @GetMapping("/editar/{id}")
     public String editarCurso(@PathVariable Integer id, Model model) {
         Curso curso = cursoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("ID inválido:" + id));
-        List<Estudiante> estudiantes = estudianteRepository.findByCursoId(id);
+        Iterable<Estudiante> estudiantes = estudianteRepository.findByCurso(id);
         model.addAttribute("curso", curso);
         model.addAttribute("estudiantes", estudiantes);
         return "formularioCurso";

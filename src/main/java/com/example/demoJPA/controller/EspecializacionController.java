@@ -36,7 +36,7 @@ public class EspecializacionController {
 
     @GetMapping("/ver/{id}")
     public String verEspecializacion(@PathVariable Integer id, Model model) {
-        List<Especializacion> especializaciones = especializacionRepository.findByIdProfesor(id);
+        Iterable<Especializacion> especializaciones = especializacionRepository.findByProfesorId(id);
         model.addAttribute("especializaciones", especializaciones);
         return "verEspecializaciones";
     }
