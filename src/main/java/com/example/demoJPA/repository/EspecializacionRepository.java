@@ -6,11 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Set;
 
 @Repository
 public interface EspecializacionRepository extends JpaRepository<Especializacion, Integer> {
-
-    @Query("SELECT * FROM especializaciones WHERE ID_Profesor = :id")
-    Set<Especializacion> findByProfesor(@Param("id") Integer id);
+    @Query(value="SELECT * FROM especializaciones WHERE ID_Profesor = ?1",
+            nativeQuery=true)
+    List<Especializacion> findByProfesorId(Integer id);
 }

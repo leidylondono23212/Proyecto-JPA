@@ -1,7 +1,6 @@
 package com.example.demoJPA.controller;
 
 import com.example.demoJPA.model.Especializacion;
-import com.example.demoJPA.model.Profesor;
 import com.example.demoJPA.repository.EspecializacionRepository;
 import com.example.demoJPA.repository.ProfesorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,18 +28,18 @@ public class EspecializacionController {
 
     @GetMapping("/nuevo/{id}")
     public String nuevaEspecializacion(@PathVariable Integer id, Model model) {
-        Especializacion especializacion =  new Especializacion();
+        Especializacion especializacion = new Especializacion();
         especializacion.setIdProfesor(id);
         model.addAttribute("especializacion", especializacion);
         return "formularioEspecializacion";
     }
 
-//    @GetMapping("/ver/{id}")
-//    public String verEspecializacion(@PathVariable Integer id, Model model) {
-//        List<Especializacion> especializaciones = especializacionRepository.findByIdProfesor(id);
-//        model.addAttribute("especializaciones", especializaciones);
-//        return "verEspecializaciones";
-//    }
+    @GetMapping("/ver/{id}")
+    public String verEspecializacion(@PathVariable Integer id, Model model) {
+        List<Especializacion> especializaciones = especializacionRepository.findByIdProfesor(id);
+        model.addAttribute("especializaciones", especializaciones);
+        return "verEspecializaciones";
+    }
 
     @PostMapping
     public String guardarEspecializacion(@ModelAttribute Especializacion especializacion) {
@@ -69,4 +68,3 @@ public class EspecializacionController {
         return "redirect:/especializaciones/ver/" + idProfesor;
     }
 }
-

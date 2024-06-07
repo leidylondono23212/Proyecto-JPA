@@ -9,11 +9,21 @@ import lombok.Data;
 public class Profesor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idProfesor")
     private Integer idProfesor;
 
+    @Column(name = "nombre")
     private String nombre;
+
+    @Column(name = "apellido")
     private String apellido;
+
+    @Column(name = "especialidad")
     private String especialidad;
+
+    @Column(name = "certificaciones")
     private String certificaciones;
+
+    @Column(name = "correoElectronico")
     private String correoElectronico;
 }

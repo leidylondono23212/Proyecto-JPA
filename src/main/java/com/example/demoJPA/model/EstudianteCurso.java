@@ -9,16 +9,20 @@ import lombok.Data;
 public class EstudianteCurso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idEstudianteCurso")
     private Integer idEstudianteCurso;
 
+    @Column(name = "idEstudiante")
     private Integer idEstudiante;
+
+    @Column(name = "idCurso")
     private Integer idCurso;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "idEstudiante", insertable = false, updatable = false)
     private Estudiante estudiante;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "idCurso", insertable = false, updatable = false)
     private Curso curso;
 }

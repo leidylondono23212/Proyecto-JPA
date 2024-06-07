@@ -1,13 +1,13 @@
 package com.example.demoJPA.controller;
 
+import com.example.demoJPA.model.Curso;
 import com.example.demoJPA.model.Profesor;
+import com.example.demoJPA.repository.CursoRepository;
 import com.example.demoJPA.repository.ProfesorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/profesores")
@@ -15,28 +15,32 @@ public class ProfesorController {
 
     @Autowired
     private ProfesorRepository profesorRepository;
+    @Autowired
+    private CursoRepository cursoRepository;
 
     @GetMapping
     public String listarProfesores(Model model) {
-        List<Profesor> profesores = profesorRepository.findAll();
-        model.addAttribute("profesores", profesores);
+        model.addAttribute("profesores", profesorRepository.findAll());
         return "profesores";
     }
 
     @GetMapping("/nuevo")
     public String nuevoProfesor(Model model) {
-        model.addAttribute("profesor", new Profesor());
+        model.addAttribute("curso", new Curso());
         return "formularioProfesor";
     }
 
     @PostMapping
-    public String guardarProfesor(@ModelAttribute Profesor profesor) {
-        profesorRepository.save(profesor);
+    public String guardarProfesor(@ModelAttribute Curso curso) {
+        Profesor savedProfesor = profesorRepository.save(curso.getProfesor());
+        curso.setIdProfesor(savedProfesor.getIdProfesor());
+        cursoRepository.save(curso);
         return "redirect:/profesores";
     }
 
     @GetMapping("/editar/{id}")
     public String editarProfesor(@PathVariable Integer id, Model model) {
+        model.addAttribute("curso", new Curso());
         Profesor profesor = profesorRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("ID inválido:" + id));
         model.addAttribute("profesor", profesor);
         return "formularioProfesor";
@@ -55,4 +59,3 @@ public class ProfesorController {
         return "redirect:/profesores";
     }
 }
-
